@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मराठी कॅल्क्युलेटर</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #f4f4f4; }
+        .calculator { width: 90%; max-width: 300px; margin: 50px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0px 0px 10px gray; }
+        .screen { width: 100%; height: 60px; font-size: 24px; text-align: right; margin-bottom: 15px; padding: 10px; border: 2px solid #ccc; border-radius: 5px; }
+        .btn-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .btn { width: 100%; height: 60px; font-size: 22px; cursor: pointer; border: none; border-radius: 5px; background: #ddd; }
+        .btn:active { background: #bbb; }
+        .btn.operator { background: #f9a825; color: white; }
+        .btn.clear { background: #d32f2f; color: white; }
+        .btn.equal { background: #388e3c; color: white; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="screen" class="screen" disabled>
+        <div class="btn-container">
+            <button class="btn clear" onclick="clearScreen()">पुसा</button>
+            <button class="btn" onclick="appendValue('७')">७</button>
+            <button class="btn" onclick="appendValue('८')">८</button>
+            <button class="btn" onclick="appendValue('९')">९</button>
+            <button class="btn operator" onclick="appendValue('+')">➕</button>
+            <button class="btn" onclick="appendValue('४')">४</button>
+            <button class="btn" onclick="appendValue('५')">५</button>
+            <button class="btn" onclick="appendValue('६')">६</button>
+            <button class="btn operator" onclick="appendValue('-')">➖</button>
+            <button class="btn" onclick="appendValue('१')">१</button>
+            <button class="btn" onclick="appendValue('२')">२</button>
+            <button class="btn" onclick="appendValue('३')">३</button>
+            <button class="btn operator" onclick="appendValue('*')">✖</button>
+            <button class="btn" onclick="appendValue('०')">०</button>
+            <button class="btn" onclick="appendValue('.')">.</button>
+            <button class="btn equal" onclick="calculate()">=</button>
+            <button class="btn operator" onclick="appendValue('/')">➗</button>
+        </div>
+    </div>
+    <script>
+        function appendValue(value) {
+            document.getElementById('screen').value += value;
+        }
+        function clearScreen() {
+            document.getElementById('screen').value = '';
+        }
+        function calculate() {
+            try {
+                let expression = document.getElementById('screen').value;
+                let convertedExpression = expression.replaceAll('०', '0').replaceAll('१', '1').replaceAll('२', '2')
+                    .replaceAll('३', '3').replaceAll('४', '4').replaceAll('५', '5')
+                    .replaceAll('६', '6').replaceAll('७', '7').replaceAll('८', '8').replaceAll('९', '9');
+                let result = eval(convertedExpression);
+                let marathiResult = result.toString().replaceAll('0', '०').replaceAll('1', '१').replaceAll('2', '२')
+                    .replaceAll('3', '३').replaceAll('4', '४').replaceAll('5', '५')
+                    .replaceAll('6', '६').replaceAll('7', '७').replaceAll('8', '८').replaceAll('9', '९');
+                document.getElementById('screen').value = marathiResult;
+            } catch (e) {
+                alert('चुकीचे गणित!');
+            }
+        }
+    </script>
+</body>
+</html>
